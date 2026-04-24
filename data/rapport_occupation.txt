@@ -1,0 +1,30 @@
+Salle : Auditoire L1 (AUD-L1)
+Occupés : 4
+Libres : 6
+Taux : 40%
+-----------------------------
+Salle : Auditoire L2 (AUD-L2)
+Occupés : 9
+Libres : 1
+Taux : 90%
+-----------------------------
+Salle : Auditoire L3 (AUD-L3)
+Occupés : 2
+Libres : 8
+Taux : 20%
+-----------------------------
+Salle : Auditoire L4 (AUD-L4)
+Occupés : 3
+Libres : 7
+Taux : 30%
+-----------------------------
+Salle : Salle Machines (SALLE-MACH)
+Occupés : 0
+Libres : 10
+Taux : 0%
+-----------------------------
+Salle : Salle Management (SALLE-MGT)
+Occupés : 0
+Libres : 10
+Taux : 0%
+-----------------------------
