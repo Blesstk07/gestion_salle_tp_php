@@ -121,17 +121,17 @@
   {
     "cours_id": "C16",
     "salle_id": "AUD-L2",
-    "jour": "Mercredi",
+    "jour": "Lundi",
     "heure_debut": "08:00",
     "heure_fin": "12:00",
-    "groupe": "L2"
+    "groupe": "L1"
   },
   {
     "cours_id": "C17",
     "salle_id": "AUD-L2",
-    "jour": "Mercredi",
-    "heure_debut": "13:00",
-    "heure_fin": "17:00",
+    "jour": "Jeudi",
+    "heure_debut": "08:00",
+    "heure_fin": "12:00",
     "groupe": "L2"
   },
   {
