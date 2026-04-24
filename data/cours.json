@@ -1,0 +1,20 @@
+[
+    {"id": "C1", "intitule": "Architecture des Ordinateurs et Réseaux", "volume": 4, "type": "tronc", "groupe": "L1"},
+    {"id": "C2", "intitule": "Base de données", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C3", "intitule": "Systèmes d'exploitation", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C4", "intitule": "Cybersécurité", "volume": 4, "type": "option", "groupe": "OPT-SEC"},
+    {"id": "C5", "intitule": "Data Science", "volume": 4, "type": "option", "groupe": "OPT-DATA"},
+    {"id": "C6", "intitule": "Génie Logiciel", "volume": 4,"type": "option","groupe": "OPT-GL"},
+    {"id": "C7", "intitule": "Robotique", "volume": 4, "type": "option", "groupe": "OPT-ROBOT"},
+    {"id": "C8", "intitule": "Circuits Logiques", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C9", "intitule": "Java", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C10", "intitule": "Python", "volume": 4, "type": "tronc", "groupe": "L1"},
+    {"id": "C11", "intitule": "PHP", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C12", "intitule": "Electricité", "volume": 4, "type": "tronc", "groupe": "L1"},
+    {"id": "C13", "intitule": "Mathématiques", "volume": 4, "type": "tronc", "groupe": "L1"},
+    {"id": "C14", "intitule": "Langage SQL", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C15", "intitule": "Introduction à l'Algorithmique", "volume": 4, "type": "tronc", "groupe": "L1"},
+    {"id": "C16", "intitule": "Langage C", "volume": 4, "type": "tronc", "groupe": "L1"},
+    {"id": "C17", "intitule": "Gestion des projets", "volume": 4, "type": "tronc", "groupe": "L2"},
+    {"id": "C18", "intitule": "Systèmes Embarqués et Robotique", "volume": 4, "type": "option", "groupe": "OPT-ROBOT"}
+]

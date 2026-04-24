@@ -1,0 +1,6 @@
+[
+    {"id": "OPT-SEC", "libelle": "Sécurité Informatique", "promotion": "L3", "effectif": 40},
+    {"id": "OPT-GL", "libelle": "Génie Logiciel", "promotion": "L3", "effectif": 35},
+    {"id": "OPT-DATA", "libelle": "Data Science", "promotion": "L4", "effectif": 30},
+    {"id": "OPT-ROBOT", "libelle": "Robotique", "promotion": "L4", "effectif": 25}
+]

@@ -1,0 +1,8 @@
+[
+    {"id": "AUD-L1", "designation": "Auditoire L1", "capacite": 700},
+    {"id": "AUD-L2", "designation": "Auditoire L2", "capacite": 450},
+    {"id": "AUD-L3", "designation": "Auditoire L3", "capacite": 120},
+    {"id": "AUD-L4", "designation": "Auditoire L4", "capacite": 100},
+    {"id": "SALLE-MACH", "designation": "Salle Machines", "capacite": 80},
+    {"id": "SALLE-MGT", "designation": "Salle Management", "capacite": 60}
+]
