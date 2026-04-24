@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une salle</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            color: #b30000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            border: 2px solid #b30000;
+            border-radius: 10px;
+            background: #ffe6e6;
+        }
+
+        h2 {
+            text-align: center;
+            color: #b30000;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #b30000;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background: #b30000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #800000;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h2>🏫 Ajouter une Salle</h2>
+
+    <!-- FORMULAIRE -->
+    <form method="POST" action="traitement_salle.php">
+
+        <label for="id">Numéro de la salle</label>
+        <input type="text" name="id" required placeholder="Ex: AUD-L2">
+
+        <label for="designation">Désignation de la salle</label>
+        <input type="text" name="designation" required placeholder="Ex: Auditoire L2">
+
+        <label for="capacite">Capacité de la salle</label>
+        <input type="number" name="capacite" required placeholder="Ex: 120">
+
+        <button type="submit"> Ajouter la nouvelle salle</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
