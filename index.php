@@ -1,6 +1,22 @@
 <?php
+session_start();
+
+/* ===============================
+   🔐 PROTECTION SESSION
+================================ */
+if (!isset($_SESSION['user'])) {
+    header("Location: auth/login.php");
+    exit;
+}
+
+$user = $_SESSION['user'];
+$role = $_SESSION['role'] ?? 'user';
+
 require_once "fonctions.php";
 
+/* ===============================
+   📁 CHARGEMENT DONNÉES
+================================ */
 $salles = charger_salles("data/salles.json");
 $cours = charger_cours("data/cours.json");
 
@@ -8,8 +24,11 @@ $planning = file_exists("data/planning.json")
     ? json_decode(file_get_contents("data/planning.json"), true)
     : [];
 
-if ($planning === null) $planning = [];
+if (!is_array($planning)) $planning = [];
 
+/* ===============================
+   ⚠️ ANALYSE
+================================ */
 $conflits = detecter_conflits($planning);
 $rapport = generer_rapport_occupation($planning, $salles);
 ?>
@@ -42,7 +61,14 @@ body{
 
 .sidebar h2{
     text-align:center;
+    margin-bottom:10px;
+}
+
+.user-box{
+    text-align:center;
+    font-size:14px;
     margin-bottom:20px;
+    opacity:0.9;
 }
 
 .sidebar a{
@@ -80,7 +106,7 @@ header h1{
     margin:0;
 }
 
-/* ================= DASHBOARD CARDS ================= */
+/* ================= CARDS ================= */
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -109,11 +135,6 @@ header h1{
     color:white;
     border-radius:8px;
     text-decoration:none;
-    transition:0.3s;
-}
-
-.btn:hover{
-    background:#b48a00;
 }
 
 /* ================= SECTIONS ================= */
@@ -144,17 +165,12 @@ td{
     border-bottom:1px solid #eee;
 }
 
-tr:hover{
-    background:#f7f0ff;
-}
-
 /* ================= FORM ================= */
 .form-card{
     background:white;
     padding:20px;
     border-radius:12px;
     box-shadow:0 5px 15px rgba(0,0,0,0.08);
-    border-left:4px solid #b48a00;
 }
 
 .form-grid{
@@ -163,26 +179,10 @@ tr:hover{
     gap:15px;
 }
 
-.form-group{
-    display:flex;
-    flex-direction:column;
-}
-
-.form-group label{
-    font-weight:600;
-    margin-bottom:5px;
-    color:#4b1d6b;
-}
-
 input,select{
     padding:10px;
     border-radius:10px;
     border:2px solid #eee;
-    background:#faf7ff;
-}
-
-input:focus,select:focus{
-    border-color:#b48a00;
 }
 
 .btn-submit{
@@ -215,20 +215,29 @@ input:focus,select:focus{
 
 <!-- SIDEBAR -->
 <div class="sidebar">
+
     <h2>🎓 SGA</h2>
+
+    <div class="user-box">
+        👤 <?= htmlspecialchars($user) ?><br>
+        🔰 <?= htmlspecialchars($role) ?>
+    </div>
+
     <a href="#dashboard">📊 Dashboard</a>
     <a href="#planning">📅 Planning</a>
     <a href="#ajout">➕ Ajouter</a>
-    <a href="export_pdf.php">📄 Export</a>
+    <a href="#conflits">⚠️ Conflits</a>
+    <a href="#rapport">📈 Rapport</a>
+    <a href="auth/logout.php">🚪 Déconnexion</a>
+
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
-<!-- HEADER -->
 <header id="dashboard">
     <h1>🎓 Système de Gestion des Auditoires</h1>
-    <p>Interface administrative intelligente</p>
+    <p>Bienvenue dans votre espace de gestion intelligent</p>
 </header>
 
 <!-- CARDS -->
@@ -241,7 +250,7 @@ input:focus,select:focus{
 
 <div class="card">
     <h3>⚠️ Conflits</h3>
-    <p><?= count($conflits) ?> détectés</p>
+    <p><?= count($conflits) ?></p>
 </div>
 
 <div class="card">
@@ -262,19 +271,16 @@ input:focus,select:focus{
 
 <table>
 <tr>
-<th>Jour</th><th>Heure</th><th>Salle</th><th>Cours</th><th>Groupe</th><th>Action</th>
+<th>Jour</th><th>Heure</th><th>Salle</th><th>Cours</th><th>Groupe</th>
 </tr>
 
-<?php foreach ($planning as $i => $p): ?>
+<?php foreach ($planning as $p): ?>
 <tr>
-<td><?= $p['jour'] ?></td>
-<td><?= $p['heure_debut']." - ".$p['heure_fin'] ?></td>
-<td><?= $p['salle_id'] ?></td>
-<td><?= $p['cours_id'] ?></td>
-<td><?= $p['groupe'] ?></td>
-<td>
-<a class="btn" style="background:red;" href="supprimer_planning.php?id=<?= $i ?>">🗑</a>
-</td>
+<td><?= htmlspecialchars($p['jour']) ?></td>
+<td><?= htmlspecialchars($p['heure_debut']." - ".$p['heure_fin']) ?></td>
+<td><?= htmlspecialchars($p['salle_id']) ?></td>
+<td><?= htmlspecialchars($p['cours_id']) ?></td>
+<td><?= htmlspecialchars($p['groupe']) ?></td>
 </tr>
 <?php endforeach; ?>
 
@@ -292,43 +298,25 @@ input:focus,select:focus{
 
 <div class="form-grid">
 
-<div class="form-group">
-<label>Cours</label>
 <select name="cours_id">
 <?php foreach($cours as $c): ?>
 <option value="<?= $c['id'] ?>"><?= $c['intitule'] ?></option>
 <?php endforeach; ?>
 </select>
-</div>
 
-<div class="form-group">
-<label>Salle</label>
 <select name="salle_id">
 <?php foreach($salles as $s): ?>
 <option value="<?= $s['id'] ?>"><?= $s['designation'] ?></option>
 <?php endforeach; ?>
 </select>
-</div>
 
-<div class="form-group">
-<label>Jour</label>
-<input name="jour">
-</div>
+<input name="jour" placeholder="Jour">
 
-<div class="form-group">
-<label>Début</label>
 <input type="time" name="heure_debut">
-</div>
 
-<div class="form-group">
-<label>Fin</label>
 <input type="time" name="heure_fin">
-</div>
 
-<div class="form-group">
-<label>Groupe</label>
-<input name="groupe">
-</div>
+<input name="groupe" placeholder="Groupe">
 
 </div>
 
@@ -341,24 +329,24 @@ input:focus,select:focus{
 </section>
 
 <!-- CONFLITS -->
-<section>
+<section id="conflits">
 <h2>⚠️ Conflits</h2>
 
 <?php if(empty($conflits)): ?>
-<div class="alert success">Aucun conflit</div>
+<div class="alert success">Aucun conflit détecté</div>
 <?php else: ?>
 <div class="alert"><?= count($conflits) ?> conflit(s)</div>
 <?php foreach($conflits as $c): ?>
-<p><?= $c ?></p>
+<p><?= htmlspecialchars($c) ?></p>
 <?php endforeach; ?>
 <?php endif; ?>
 
 </section>
 
 <!-- RAPPORT -->
-<section>
+<section id="rapport">
 <h2>📊 Rapport</h2>
-<pre><?= $rapport ?></pre>
+<pre><?= htmlspecialchars($rapport) ?></pre>
 </section>
 
 </div>
