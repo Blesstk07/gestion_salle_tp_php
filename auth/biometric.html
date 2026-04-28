@@ -3,86 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biométrie SGA</title>
+<title>Biométrie</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial;
     background:linear-gradient(135deg,#4b1d6b,#b48a00);
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
     color:white;
 }
 
-.container{
-    text-align:center;
-    padding:20px;
+.box{
     width:90%;
     max-width:400px;
     background:rgba(255,255,255,0.1);
+    padding:20px;
     border-radius:15px;
-    backdrop-filter: blur(10px);
+    text-align:center;
 }
-
-h2{ margin-bottom:10px; }
 
 button{
     width:100%;
     padding:15px;
-    margin-top:20px;
+    margin-top:15px;
     border:none;
     border-radius:10px;
-    font-size:16px;
     font-weight:bold;
     background:white;
     color:#4b1d6b;
-    cursor:pointer;
-}
-
-button:active{
-    transform:scale(0.98);
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h2>🔐 Vérification biométrique</h2>
-    <p>Utilise ton empreinte ou Face ID pour continuer</p>
+<div class="box">
+    <h2>🔐 Validation biométrique</h2>
+    <p>Utilise empreinte ou Face ID</p>
 
-    <button onclick="auth()">Activer biométrie</button>
+    <button onclick="auth()">Activer</button>
 </div>
 
 <script>
-async function auth() {
+async function auth(){
     try {
         const publicKey = {
             challenge: new Uint8Array(32),
-            rp: { name: "SGA System" },
+            rp: { name: "SGA" },
             user: {
                 id: new Uint8Array(16),
-                name: "sga_user",
+                name: "user",
                 displayName: "SGA User"
             },
             pubKeyCredParams: [{ type: "public-key", alg: -7 }],
             authenticatorSelection: {
                 authenticatorAttachment: "platform",
                 userVerification: "required"
-            },
-            timeout: 60000
+            }
         };
 
         await navigator.credentials.create({ publicKey });
 
-        // succès biométrie
-        window.location.href = "index.php";
+        // ✅ IMPORTANT : retour dashboard ROOT
+        window.location.href = "../index.php";
 
     } catch (e) {
-        alert("❌ Échec biométrie : " + e.message);
+        alert("Échec biométrie: " + e.message);
     }
 }
 </script>

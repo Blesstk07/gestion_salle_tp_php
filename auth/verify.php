@@ -11,17 +11,18 @@ $users = [
 
 if (isset($users[$username]) && $users[$username] === $password) {
 
-    // étape 1 validée
     $_SESSION['temp_user'] = $username;
 
+    // 👉 étape biométrie
     header("Location: biometric.php");
     exit;
 
 } else {
+
     echo "
     <div style='text-align:center;font-family:Arial;margin-top:100px;'>
         <h2 style='color:red;'>❌ Identifiants incorrects</h2>
-        <a href='login.php'>Retour</a>
+        <a href='login.php'>⬅ Retour</a>
     </div>";
 }
 ?>
